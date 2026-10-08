@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - TradeNova</title>
+
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="logo">
+            Trade<span>Nova</span>
+        </div>
+
+        <div class="demo-badge">
+            DEMO PLATFORM
+        </div>
+
+        <h1>Welcome back</h1>
+
+        <p class="subtitle">
+            Log in to your TradeNova account
+        </p>
+
+
+        <form id="loginForm">
+
+            <!-- Username -->
+            <div class="input-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Password -->
+            <div class="input-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="password-box">
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        id="showPassword"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <a href="#" class="forgot-password">
+                Forgot password?
+            </a>
+
+
+            <button
+                type="submit"
+                class="login-button"
+            >
+                Log In
+            </button>
+
+        </form>
+
+
+        <p class="signup-text">
+
+            Don't have an account?
+
+            <a href="signup.html">
+                Sign Up
+            </a>
+
+        </p>
+
+
+        <p class="demo-note">
+            This is a simulated demo platform.
+            Do not use real passwords.
+        </p>
+
+    </div>
+
+
+    <script src="login.js"></script>
+
+</body>
+</html>

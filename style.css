@@ -1,0 +1,389 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #05090d;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+/* Main phone/app container */
+.phone {
+    width: 100%;
+    max-width: 430px;
+    min-height: 100vh;
+    background: #071018;
+    position: relative;
+    padding-bottom: 85px;
+}
+
+/* Header */
+header {
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid #17242e;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.logo span {
+    color: #16e89a;
+    font-size: 29px;
+    font-weight: bold;
+}
+
+.header-icons {
+    display: flex;
+    gap: 18px;
+    font-size: 18px;
+}
+
+/* Main content */
+main {
+    padding: 20px;
+}
+
+/* Demo account label */
+.demo-label {
+    display: inline-block;
+    background: #102c25;
+    color: #20e89b;
+    padding: 6px 10px;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    letter-spacing: 0.4px;
+}
+
+/* Balance card */
+.balance-card {
+    background: linear-gradient(
+        145deg,
+        #102333,
+        #0b1721
+    );
+
+    border: 1px solid #1b3547;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.balance-card p {
+    color: #8d9aa4;
+    font-size: 13px;
+}
+
+.balance-card h1 {
+    margin: 8px 0;
+    font-size: 32px;
+    letter-spacing: -1px;
+}
+
+.balance-card span {
+    color: #16e89a;
+    font-size: 13px;
+}
+
+/* Quick action buttons */
+.quick-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin: 16px 0;
+}
+
+button {
+    background: #101c25;
+    color: white;
+    border: 1px solid #263744;
+    border-radius: 10px;
+    padding: 12px 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    background: #162731;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+button.deposit {
+    background: #16e89a;
+    color: #03100b;
+    border: none;
+    font-weight: bold;
+}
+
+button.deposit:hover {
+    background: #20f0a2;
+}
+
+/* Market chart card */
+.market-card {
+    background: #0b151e;
+    border: 1px solid #1a2a35;
+    border-radius: 16px;
+    padding: 16px;
+    overflow: hidden;
+}
+
+/* Chart header */
+.market-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.market-top small {
+    color: #8d9aa4;
+    font-size: 12px;
+}
+
+.market-top h2 {
+    margin-top: 7px;
+    font-size: 23px;
+}
+
+.market-top strong {
+    color: #16e89a;
+    font-size: 13px;
+    padding-top: 8px;
+}
+
+/* Chart */
+.chart {
+    height: 210px;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #081119;
+}
+
+/* Chart grid */
+.grid {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(38, 55, 68, 0.45) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(38, 55, 68, 0.45) 1px,
+            transparent 1px
+        );
+
+    background-size: 50px 42px;
+}
+
+/* Canvas containing candles */
+.chart canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Time buttons */
+.time-buttons {
+    display: flex;
+    gap: 5px;
+    margin-top: 8px;
+}
+
+.time-buttons button {
+    border: none;
+    background: transparent;
+    color: #8998a3;
+    padding: 7px 8px;
+    font-size: 11px;
+}
+
+.time-buttons button:hover {
+    background: #111f29;
+}
+
+.time-buttons .active {
+    background: #163c32;
+    color: #16e89a;
+    border-radius: 6px;
+}
+
+/* Markets heading */
+h3 {
+    margin: 25px 0 12px;
+    font-size: 17px;
+}
+
+/* Coin rows */
+.coin {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 0;
+    border-bottom: 1px solid #14222c;
+}
+
+/* Coin icons */
+.coin-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.btc {
+    background: #f7931a;
+}
+
+.eth {
+    background: #627eea;
+}
+
+.sol {
+    background: #9945ff;
+}
+
+/* Coin name */
+.coin b {
+    font-size: 13px;
+}
+
+.coin small {
+    display: block;
+    color: #71808b;
+    margin-top: 4px;
+    font-size: 11px;
+}
+
+/* Coin price */
+.price {
+    margin-left: auto;
+    text-align: right;
+    font-size: 13px;
+}
+
+.price span {
+    display: block;
+    color: #16e89a;
+    margin-top: 4px;
+    font-size: 11px;
+}
+
+/* Bottom navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+
+    width: 100%;
+    max-width: 430px;
+
+    height: 70px;
+
+    background: #081119;
+    border-top: 1px solid #17242e;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    z-index: 20;
+}
+
+.bottom-nav a {
+    color: #687782;
+    text-align: center;
+    font-size: 19px;
+    cursor: pointer;
+    min-width: 50px;
+}
+
+.bottom-nav small {
+    display: block;
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+.bottom-nav .selected {
+    color: #16e89a;
+}
+
+/* Mobile adjustments */
+@media (max-width: 360px) {
+
+    main {
+        padding: 15px;
+    }
+
+    .balance-card h1 {
+        font-size: 27px;
+    }
+
+    .market-top h2 {
+        font-size: 20px;
+    }
+
+    .chart {
+        height: 185px;
+    }
+
+    .quick-actions {
+        gap: 5px;
+    }
+
+    button {
+        font-size: 11px;
+    }
+}
+
+/* Desktop preview */
+@media (min-width: 700px) {
+
+    body {
+        padding: 30px 0;
+        align-items: flex-start;
+    }
+
+    .phone {
+        max-width: 1100px;
+        min-height: 900px;
+        border: 1px solid #17242e;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .bottom-nav {
+        max-width: 1100px;
+    }
+}

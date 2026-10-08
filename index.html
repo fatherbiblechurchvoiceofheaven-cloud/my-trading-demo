@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TradeNova Demo</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="phone">
+
+    <header>
+        <div class="logo">
+            <span>↗</span>
+            TradeNova
+        </div>
+
+        <div class="header-icons">
+            🔔
+            👤
+        </div>
+    </header>
+
+    <main>
+
+        <div class="demo-label">
+            DEMO ACCOUNT
+        </div>
+
+        <section class="balance-card">
+            <p>Demo Balance</p>
+
+            <h1>$10,000.00</h1>
+
+            <span>+2.41% today</span>
+        </section>
+
+        <div class="quick-actions">
+
+            <button class="deposit">
+                ＋ Deposit
+            </button>
+
+            <button>
+                ⇩ Withdraw
+            </button>
+
+            <button>
+                ⇄ Trade
+            </button>
+
+        </div>
+
+        <section class="market-card">
+
+            <div class="market-top">
+
+                <div>
+                    <small>BTC / USDT</small>
+
+                    <h2 id="btcPrice">
+                        $68,421.32
+                    </h2>
+                </div>
+
+                <strong id="percentage">
+                    +2.41%
+                </strong>
+
+            </div>
+
+            <div class="chart">
+
+                <div class="grid"></div>
+
+                <canvas id="candleChart"></canvas>
+
+            </div>
+
+            <div class="time-buttons">
+
+                <button>1m</button>
+                <button>5m</button>
+
+                <button class="active">
+                    15m
+                </button>
+
+                <button>1h</button>
+                <button>4h</button>
+                <button>1d</button>
+
+            </div>
+
+        </section>
+
+
+        <h3>Markets</h3>
+
+
+        <div class="coin">
+
+            <div class="coin-icon btc">
+                ₿
+            </div>
+
+            <div>
+                <b>BTC/USDT</b>
+                <small>Bitcoin</small>
+            </div>
+
+            <div class="price">
+
+                <span id="btcMarketPrice">
+                    $68,421.32
+                </span>
+
+                <span>
+                    +2.41%
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="coin">
+
+            <div class="coin-icon eth">
+                Ξ
+            </div>
+
+            <div>
+                <b>ETH/USDT</b>
+                <small>Ethereum</small>
+            </div>
+
+            <div class="price">
+                $3,245.17
+
+                <span>
+                    +1.82%
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="coin">
+
+            <div class="coin-icon sol">
+                S
+            </div>
+
+            <div>
+                <b>SOL/USDT</b>
+                <small>Solana</small>
+            </div>
+
+            <div class="price">
+                $162.34
+
+                <span>
+                    +3.12%
+                </span>
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <nav class="bottom-nav">
+
+        <a class="selected">
+            ⌂
+            <small>Home</small>
+        </a>
+
+        <a>
+            ▥
+            <small>Markets</small>
+        </a>
+
+        <a>
+            ⇄
+            <small>Trade</small>
+        </a>
+
+        <a>
+            ▣
+            <small>Wallet</small>
+        </a>
+
+        <a>
+            ●
+            <small>Profile</small>
+        </a>
+
+    </nav>
+
+</div>
+
+
+<script>
+
+const canvas = document.getElementById("candleChart");
+
+const ctx = canvas.getContext("2d");
+
+let candles = [];
+
+let price = 68421.32;
+
+
+/* Generate random number */
+
+function random(min, max) {
+
+    return Math.random() * (max - min) + min;
+
+}
+
+
+/* Create candle */
+
+function createCandle() {
+
+    const open = price;
+
+    const movement = random(-500, 500);
+
+    const close = open + movement;
+
+    const high =
+        Math.max(open, close)
+        + random(50, 250);
+
+    const low =
+        Math.min(open, close)
+        - random(50, 250);
+
+    price = close;
+
+    return {
+        open: open,
+        close: close,
+        high: high,
+        low: low
+    };
+
+}
+
+
+/* Starting candles */
+
+for (let i = 0; i < 40; i++) {
+
+    candles.push(createCandle());
+
+}
+
+
+/* Draw chart */
+
+function drawChart() {
+
+    const width = canvas.clientWidth;
+
+    const height = canvas.clientHeight;
+
+    const ratio = window.devicePixelRatio || 1;
+
+    canvas.width = width * ratio;
+
+    canvas.height = height * ratio;
+
+    ctx.setTransform(
+        ratio,
+        0,
+        0,
+        ratio,
+        0,
+        0
+    );
+
+    ctx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    let highest = Math.max(
+        ...candles.map(c => c.high)
+    );
+
+    let lowest = Math.min(
+        ...candles.map(c => c.low)
+    );
+
+
+    const range = highest - lowest;
+
+
+    highest += range * 0.1;
+
+    lowest -= range * 0.1;
+
+
+    const spacing =
+        width / candles.length;
+
+    const candleWidth =
+        Math.max(3, spacing * 0.55);
+
+
+    candles.forEach((candle, i) => {
+
+        const x =
+            i * spacing + spacing / 2;
+
+
+        const yHigh =
+            height -
+            ((candle.high - lowest) /
+            (highest - lowest)) *
+            height;
+
+
+        const yLow =
+            height -
+            ((candle.low - lowest) /
+            (highest - lowest)) *
+            height;
+
+
+        const yOpen =
+            height -
+            ((candle.open - lowest) /
+            (highest - lowest)) *
+            height;
+
+
+        const yClose =
+            height -
+            ((candle.close - lowest) /
+            (highest - lowest)) *
+            height;
+
+
+        const bullish =
+            candle.close >= candle.open;
+
+
+        const candleColor =
+            bullish
+            ? "#16e89a"
+            : "#ff4757";
+
+
+        /* Wick */
+
+        ctx.beginPath();
+
+        ctx.moveTo(x, yHigh);
+
+        ctx.lineTo(x, yLow);
+
+        ctx.strokeStyle = candleColor;
+
+        ctx.lineWidth = 1;
+
+        ctx.stroke();
+
+
+        /* Body */
+
+        const top =
+            Math.min(yOpen, yClose);
+
+        const bottom =
+            Math.max(yOpen, yClose);
+
+
+        const bodyHeight =
+            Math.max(2, bottom - top);
+
+
+        ctx.fillStyle = candleColor;
+
+
+        ctx.fillRect(
+            x - candleWidth / 2,
+            top,
+            candleWidth,
+            bodyHeight
+        );
+
+    });
+
+}
+
+
+/* Add new candle */
+
+function newCandle() {
+
+    candles.push(
+        createCandle()
+    );
+
+
+    if (candles.length > 40) {
+
+        candles.shift();
+
+    }
+
+
+    drawChart();
+
+
+    document.getElementById(
+        "btcPrice"
+    ).textContent =
+        "$" +
+        price.toLocaleString(
+            "en-US",
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
+
+
+    document.getElementById(
+        "btcMarketPrice"
+    ).textContent =
+        "$" +
+        price.toLocaleString(
+            "en-US",
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
+
+}
+
+
+/* Draw immediately */
+
+drawChart();
+
+
+/* New candle every 1.5 seconds */
+
+setInterval(
+    newCandle,
+    1500
+);
+
+
+/* Redraw when window changes */
+
+window.addEventListener(
+    "resize",
+    drawChart
+);
+
+
+/* Deposit button */
+
+document
+    .querySelector(".deposit")
+    .addEventListener(
+        "click",
+        function() {
+
+            alert(
+                "Demo support chat will open here."
+            );
+
+        }
+    );
+
+</script>
+
+</body>
+
+</html>
