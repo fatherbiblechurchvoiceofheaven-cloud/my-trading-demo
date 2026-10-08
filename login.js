@@ -53,7 +53,7 @@ loginForm.addEventListener("submit", function (event) {
         localStorage.setItem("demoLoggedIn", "true");
 
         // Go to dashboard
-        window.location.href = "index.html";
+        window.location.href = "dashboard.html";
 
     } else {
         alert("Incorrect username or password.");
