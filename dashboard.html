@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>TradeNova Demo</title>
+    <title>TradeNova Dashboard</title>
 
-    <link rel="stylesheet" href="style.css">
+    <script>
+        if (localStorage.getItem("demoLoggedIn") !== "true") {
+            window.location.replace("./login.html");
+        }
+    </script>
 </head>
+
 
 <body>
 
@@ -490,6 +495,30 @@ document
         }
     );
 
+</script>
+<div style="text-align:center; padding:20px;">
+    <button
+        id="logoutButton"
+        style="
+            background:#20252d;
+            color:#ffffff;
+            border:1px solid #20d47b;
+            padding:12px 30px;
+            border-radius:10px;
+            font-size:15px;
+            font-weight:bold;
+            cursor:pointer;
+        "
+    >
+        Log Out
+    </button>
+</div>
+
+<script>
+    document.getElementById("logoutButton").addEventListener("click", function () {
+        localStorage.removeItem("demoLoggedIn");
+        window.location.replace("./login.html");
+    });
 </script>
 
 </body>
